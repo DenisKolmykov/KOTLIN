@@ -29,13 +29,67 @@ fun main(args: Array<String>) {
         val input = readlnOrNull()!!
         if (input.isNotBlank()) {
             val inputData = input.split(" ")
-            when {
-                inputData.first().lowercase() == "exit" -> return //или так: input.lowercase().startsWith("exit")
-                inputData.first().lowercase() == "help" -> printHelp()
-                inputData.first().lowercase() == "add" && inputData.size == 4 -> addPersonData(inputData)
-                else -> println("Команда или формат введеных данных не корректны. Повторите ввод (help - в помощь)\n")
+//            when {
+//                inputData.first().lowercase() == "exit" -> return //или так: input.lowercase().startsWith("exit")
+//                inputData.first().lowercase() == "help" -> printHelp()
+//                inputData.first().lowercase() == "add" && inputData.size == 4 -> addPersonData(inputData)
+//                else -> println("Команда или формат введеных данных не корректны. Повторите ввод (help - в помощь)\n")
+//            }
+            /*
+            Александр Верещагин・Преподаватель
+            Решение отличное. Есть незначительные замечания.
+            1. Если использовать строку в тройных кавычках, не придётся экранировать слеш.
+            2. Можно внести inputData.first().lowercase() внутрь when, и в ветках писать только саму строчку. Но в этом случае проверку на inputData.size == 4 придётся перенести внутрь ветки или в addPersonData
+
+            when (inputData.first().lowercase()) {
+            "exit" -> return //или так: input.lowercase().startsWith("exit")
+            "help" -> printHelp()
+            "add" -> addPersonData(inputData)
+            else -> println("Команда или формат введеных данных не корректны. Повторите ввод (help - в помощь)\n")
+            } */
+            when (inputData.first().lowercase()) {
+                "exit" -> return //или так: input.lowercase().startsWith("exit")
+                "help" -> printHelp()
+                "add" -> addPersonData(inputData)
+                else -> println("НЕКОРРЕКТНАЯ КОМАНДА. Повторите ввод (help - в помощь)\n")
             }
         }
+    }
+}
+
+//fun addPersonData(inputData: List<String>) {
+//    when {// можно было использовать inputData.contains("phone")...
+//        inputData[2] == "phone" || inputData[2] == "email" -> savePersonData(inputData)
+//        else -> println("Введенные данные не содержат ключевого слова 'phone' или 'email'!\nПовторите ввод!\n")
+//    }
+//}
+
+fun addPersonData(inputData: List<String>) {
+    if (inputData.size == 4) {
+        if (inputData[2] == "phone" || inputData[2] == "email") {
+            savePersonData(inputData)
+        } else {
+            println("Введенные данные не содержат ключевого слова 'phone' или 'email'!\nПовторите ввод!\n")
+        }
+    }else {
+        println("Не корректный формат строки данных (некорректное количество элементов)\n")
+    }
+}
+
+fun savePersonData(inputData: List<String>){
+//    val patternEmail = Regex("\\w+@\\w+\\.\\w+")
+    val patternEmail = Regex("""\w+@\w+\.\w+""")
+
+//    val patternPhone = Regex("^\\+\\d+")
+    val patternPhone = Regex("""^\+\d+""")
+
+//    val patternPhone = """^\+\d+""".toRegex()
+
+    if (inputData[3].matches(patternEmail) || inputData[3].matches(patternPhone)){
+        println("Данные пользователя ${inputData[1]} успешно обновлены:")
+        println("${inputData[1]} ${inputData[2]}: ${inputData[3]}\n")
+    } else{
+        println("${inputData[2]} пользователя ${inputData[1]} введен не корректно.\nПовторите ввод\n")
     }
 }
 
@@ -48,24 +102,4 @@ fun printHelp() {
     println ("add <Имя> phone <Номер телефона> (формат: +ххххххххххх>) - ввод номера телефона (ключевое слово 'phone' - обязательно)")
     println ("add <Имя> email <Адрес электронной почты, формат: х@х.х> - ввод адреса электронной почты (ключевое слово 'email' - обязательно)")
     println ("---------------------------------------------------------------------------------------------------------------")
-}
-
-fun addPersonData(inputData: List<String>) {
-    when {// можно было использовать inputData.contains("phone")...
-        inputData[2] == "phone" || inputData[2] == "email" -> savePersonData(inputData)
-        else -> println("Введенные данные не содержат ключевого слова 'phone' или 'email'!\nПовторите ввод!\n")
-    }
-}
-
-fun savePersonData(inputData: List<String>){
-    val patternEmail = Regex("\\w+@\\w+\\.\\w+")
-    val patternPhone = Regex("^\\+\\d+")
-//    val patternPhone = """^\+\d+""".toRegex()
-
-    if (inputData[3].matches(patternEmail) || inputData[3].matches(patternPhone)){
-        println("Данные пользователя ${inputData[1]} успешно обновлены:")
-        println("${inputData[1]} ${inputData[2]}: ${inputData[3]}\n")
-    } else{
-        println("${inputData[2]} пользователя ${inputData[1]} введен не корректно.\nПовторите ввод\n")
-    }
 }
