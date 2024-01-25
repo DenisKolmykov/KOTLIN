@@ -36,7 +36,7 @@ var help: Help = Help()
 var exit: Exit = Exit()
 var add: Add = Add()
 
-fun main(args: Array<String>) {
+fun main() {
     while(true) {
         val mainMenu = "Введите команду (add, help, show, exit): "
         val command = readCommand(InputData.inputChoice(mainMenu))
