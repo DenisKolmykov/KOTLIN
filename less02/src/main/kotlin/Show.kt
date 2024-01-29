@@ -1,7 +1,8 @@
-class Show(var showLastData: Person? = null): Command {
+data object Show: Command {
+    var showLastInputDataperson: Person? = null
     fun printLastData(): String{
-        return if (showLastData != null){
-            "последняя запись была у пользователя ${showLastData!!.name} введен ${showLastData!!.showLastField}: ${showLastData!!.showLastInput}\n"
+        return if (showLastInputDataperson != null){
+            "последняя запись была у пользователя ${showLastInputDataperson!!.name} - введено: ${showLastInputDataperson!!.email} ${showLastInputDataperson!!.phone}\n"
         }else {
             "Not initialized\n"
         }

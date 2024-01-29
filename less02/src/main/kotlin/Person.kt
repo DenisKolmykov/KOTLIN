@@ -9,13 +9,13 @@ data class Person (
     var name : String,
     var phone : String = "",
     var email : String = "",
-    var showLastInput : String = "", // последнее введенное значение
-    var showLastField : String = "" // поле последнего введенного значения
+//    var showLastInput : String = "", // последнее введенное значение
+//    var showLastField : String = "" // поле последнего введенного значения
 ){
 
     //заполнение полей последними введенными значениями
-    fun setLastInput(showLastField: String, showLastInput : String){
-        this.showLastField = showLastField
-        this.showLastInput = showLastInput
-    }
+//    fun setLastInput(showLastField: String, showLastInput : String){
+//        this.showLastField = showLastField
+//        this.showLastInput = showLastInput
+//    }
 }

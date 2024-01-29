@@ -10,19 +10,19 @@ class Add (): Command {
                 val choice = InputData.inputChoice(menuInputData)
                 if (isValid(choice)) { // проверяем введенные значения на корректность формата и если норм - создаем объект класса Person
                     val person = Person(inputName)
-                    val lastField: String
+//                    val lastField: String
                     when (choice.substring(0, 1)) {
                         "+" -> {// в email не может быть первым символ '+'
                             person.phone = choice
-                            lastField = "phone"
+//                            lastField = "phone"
                         }
                         else -> {
                             person.email = choice
-                            lastField = "email"
+//                            lastField = "email"
                         }
                     }
-                    person.setLastInput(lastField, choice) // записываем в объект Person последние введнные значения
-                    show.showLastData = person // добавляем последние введенные значения в класс Show
+//                    person.setLastInput(lastField, choice) // записываем в объект Person последние введнные значения
+                    Show.showLastInputDataperson = person // добавляем последние введенные значения в класс Show
                     println("save ok")
                     flag = false
                 } else {

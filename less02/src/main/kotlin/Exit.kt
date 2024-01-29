@@ -1,1 +1,1 @@
-class Exit() : Command {}
+ data object Exit : Command

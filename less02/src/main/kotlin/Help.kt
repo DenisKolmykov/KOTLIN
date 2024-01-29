@@ -1,4 +1,4 @@
-class Help: Command {
+data object Help: Command {
     fun printHelp() {
         println("--------HELP------------------------------")
         println ("Приложение по заполнению телефонной книги")

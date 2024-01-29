@@ -30,12 +30,22 @@ email – адрес электронной почты
  */
 
 // вынес в "глобальные" переменные, чтобы не создавать объекты классов каждый раз при выполнении цикла while(true)
+//var show: Show = Show() // здесь однозначно "глобальная", чтоб можно было использовать в классе Add при записи последних введенных данных
+//var help: Help = Help()
+//var exit: Exit = Exit()
+//var add: Add = Add()
 
-var show: Show = Show() // здесь однозначно "глобальная", чтоб можно было использовать в классе Add при записи последних введенных данных
-var help: Help = Help()
-var exit: Exit = Exit()
-var add: Add = Add()
-
+/*
+Суть классов-команд как раз в том, что они могут хранить в себе состояние - введённые в них данные, и потом их обрабатывать.
+В виде класса команды мы связываем логику с данными для этой команды.
+Поэтому их надо создавать как раз таки на итерациях цикла while.
+Если с командой не связаны данные, например Exit и Help, её можно объявить как object,
+и у этой команды всегда будет только один экземпляр.
+Класс Person должен содержать только данные о человеке без какого либо знания об окружении и его состоянии.
+Вообще в идеале каждый класс должен выполнять свою узконаправленную задачу и быть минимально связан с остальными классами.
+Глобальные var переменные в файле Main.kt, доступные отовсюду, это, к сожалению, то, что Котлин позволяет делать,
+но неправильно с точки зрения архитектуры.
+ */
 fun main() {
     while(true) {
         val mainMenu = "Введите команду (add, help, show, exit): "
@@ -49,7 +59,7 @@ fun main() {
             }
             is Add -> command.inputPersonData()
             is Help -> command.printHelp()
-            is Show -> println(show.printLastData())
+            is Show -> println(command.printLastData())
         }
     }
 }
@@ -58,13 +68,13 @@ fun main() {
 fun readCommand(input : String): Command {
     val command: Command
     when (input.lowercase()) {
-        "exit" -> command = exit
-        "help" -> command = help
-        "add" -> command = add
-        "show" -> command = show
+        "exit" -> command = Exit
+        "help" -> command = Help
+        "add" -> command = Add()
+        "show" -> command = Show
         else -> {
             println("НЕКОРРЕКТНАЯ КОМАНДА. Повторите ввод (help - в помощь):")
-            command = help
+            command = Help
         }
     }
     return command
