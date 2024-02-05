@@ -1,0 +1,20 @@
+{
+    "name": "Valya",
+    "phoneNumbers": [],
+    "emails": ["vvv@vv.dd"]
+},
+{
+    "name": "Petr",
+    "phoneNumbers": ["+999887", "+555555"],
+    "emails": ["eee@ee.ee", "rrr@rr.rr", "uuu@uuu.uu"]
+},
+{
+    "name": "Ivan",
+    "phoneNumbers": ["+111111", "+123241242", "+3534445", "+99999"],
+    "emails": ["qqq@qqq.qq", "www@ww.ww"]
+},
+{
+    "name": "Sveta",
+    "phoneNumbers": ["+2345345"],
+    "emails": []
+},
